@@ -1,0 +1,7 @@
+<div class="dropdown-container">
+    <label class="form-control-label" [for]="forAttribute">{{label}}</label>
+    <select multiple [id]="forAttribute" name="tone" class="custom-dropdown" (change)="onSelectionChange($event.target)">
+      <option *ngFor="let option of options" [value]="option[optionValueProperty]">{{option[optionTextProperty]}}</option>
+    </select>
+  </div>
+  

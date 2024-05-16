@@ -1,0 +1,152 @@
+<div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 600px; background-image: url(assets/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
+    <!-- Mask -->
+    <span class="mask bg-gradient-primary opacity-8"></span>
+    <!-- Header container -->
+    <div class="container-fluid d-flex align-items-center">
+      <div class="row">
+        <div class="col-lg-7 col-md-10">
+          <h1 class="display-2 text-white">Create a Post</h1>
+          <p class="text-white mt-0 mb-5">This is your Blog Post creating page. You can fill in the fields and then click on Create button.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid mt--7">
+    <div class="row">
+      <div class="col-xl-12 order-xl-1">
+        <div class="card bg-secondary shadow">
+          <div class="card-header bg-white border-0">
+            <div class="row align-items-center">
+              <div class="col-8">
+                <h3 class="mb-0">Create a Blog Post</h3>
+              </div>
+            </div>
+          </div>
+          <div class="card-body">
+            <form (submit)="submitForm()">
+              <h6 class="heading-small text-muted mb-4">BLOG POST TOPIC AND INFORMATION</h6>
+              <div class="pl-lg-4">
+                <div class="row">
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <label class="form-control-label" for="topic">Topic</label>
+                      <input type="text" id="topic" class="form-control form-control-alternative"
+                              placeholder="Enter a Topic" [(ngModel)]="blogPost.topic" name="topic">
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                        <app-generic-dropdown 
+                            [options]="toneList" 
+                            [optionTextProperty]="'name'" 
+                            [optionValueProperty]="'name'"
+                            [label]="'Tone'"
+                            [placeholder]="'--Select a Tone--'"
+                            [forAttribute]="'tone'"
+                            (selectionChange)="blogPost.tone = $event">
+                        </app-generic-dropdown>
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                          <app-generic-dropdown 
+                            [options]="categoryList" 
+                            [optionTextProperty]="'name'" 
+                            [optionValueProperty]="'id'"
+                            [label]="'Category'"
+                            [placeholder]="'--Select a Category--'"
+                            [forAttribute]="'categoryId'"
+                            (selectionChange)="blogPost.categoryId = $event">
+                          </app-generic-dropdown>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                          <app-generic-dropdown 
+                            [options]="productList" 
+                            [optionTextProperty]="'productName'" 
+                            [optionValueProperty]="'id'"
+                            [label]="'Product'"
+                            [placeholder]="'--Select a Product--'"
+                            [forAttribute]="'productId'"
+                            (selectionChange)="blogPost.productId = $event">
+                          </app-generic-dropdown>
+                      </div>
+                    </div>
+                </div>                  
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="form-group">
+                      <app-generic-dropdown [options]="targetAudienceList" 
+                            [optionTextProperty]="'name'" 
+                            [optionValueProperty]="'name'"
+                            [label]="'Target Audience'"
+                            [placeholder]="'--Select an Audience--'"
+                            [forAttribute]="'targetAudience'"
+                            (selectionChange)="blogPost.targetAudience = $event">
+                      </app-generic-dropdown>
+                    </div>                    
+                  </div>
+                </div>              
+                <div class="row">
+                  <div class="col-lg-12">
+                    <div class="form-group">
+                      <app-generic-multi-dropdown [options]="seoKeywordList" 
+                            [optionTextProperty]="'keyword'" 
+                            [optionValueProperty]="'keyword'"
+                            [label]="'SEO Keywords (Hold CTRL to select multiple keywords)'"
+                            [forAttribute]="'keywords'"
+                            (selectionChange)="blogPost.keywords = $event">
+                      </app-generic-multi-dropdown>
+                    </div>                    
+                  </div>
+                </div>
+              </div>
+              <hr class="my-4" />
+              <h6 class="heading-small text-muted mb-4">BLOG POST CREATIVITY</h6>
+              <div class="pl-lg-4">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <label class="form-control-label" for="creativityLevel">Creativity Level</label>
+                      <input for="creativityLevel" name="creativityLevel" [(ngModel)]="blogPost.creativityLevel" type="range" min="0" max="1" step="0.01" class="slider" id="creativityLevel">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr class="my-4" />
+              <h6 class="heading-small text-muted mb-4">BLOG POST LENGTH</h6>
+              <div class="pl-lg-4">                
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="form-group">
+                      <div class="btn-group costumized-radio-btn-group">
+                        <button type="button" 
+                                class="btn" 
+                                [class.btn-selected]="selectedLength === 'Short'" 
+                                (click)="setSelectedLength('Short')">Short</button>
+                        <button type="button" 
+                                class="btn" 
+                                [class.btn-selected]="selectedLength === 'Medium'" 
+                                (click)="setSelectedLength('Medium')">Medium</button>
+                        <button type="button" 
+                                class="btn" 
+                                [class.btn-selected]="selectedLength === 'Long'" 
+                                (click)="setSelectedLength('Long')">Long</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="text-right">
+                <button type="submit" class="btn btn-sm btn-primary">Create</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,0 +1,96 @@
+.custom-navbar {
+	background: rgb(44,32,223);
+  background: linear-gradient(90deg, rgba(44,32,223,1) 0%, rgba(44,32,223,1) 41%, rgba(9,9,121,1) 71%, rgba(2,0,36,1) 100%);
+	color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start; 
+	padding: 10px;
+	overflow-x: auto; 
+	white-space: nowrap; 
+	-ms-overflow-style: none; 
+	scrollbar-width: none;
+  }
+  
+  .custom-navbar-logo {
+	font-size: 1.5rem;
+	margin-right: 20px;
+  }
+  
+  .custom-navbar-links {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	display: flex;
+  }
+  
+  .custom-navbar-links li {
+	margin-right: 20px;
+  }
+  
+  .custom-navbar-links li a {
+	color: #fff;
+	text-decoration: none;
+	transition: color 0.3s ease;
+  }
+  
+  .custom-navbar-links li a:hover {
+	color: #f0f0f0;
+  }
+  
+  .custom-navbar::-webkit-scrollbar {
+	display: none;
+  }
+  
+  .custom-navbar-toggle {
+	display: none;
+  }
+
+  :host .card {
+    min-height: 460px;
+  }
+
+  :host .listfeaturedtag .card-block {
+    padding-left: 20px;
+  }
+  
+  :host .listfeaturedtag .wrapfooter {
+    position: unset;
+  }
+
+.card {
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Adjust the height as necessary */
+}
+
+.card-content-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+  @media screen and (max-width: 768px) {
+	.custom-navbar {
+	  flex-wrap: nowrap; 
+	  justify-content: flex-start; 
+	  padding-left: 20px; 
+	  overflow-x: scroll;
+	}
+  
+	.custom-navbar-links {
+	  flex-wrap: nowrap;
+	}
+  }
+
+  @media screen and (max-width: 991px) {
+    .metafooter {
+        position: absolute;
+        margin-top: auto;
+        margin-bottom: 20px;
+        margin-left: 20px;
+        width: 100%;
+        left: 10px;
+    }
+  }
+  

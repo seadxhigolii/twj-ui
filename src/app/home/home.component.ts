@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BlogpostService } from '../services/blogpost.service';
+import { BlogPost } from 'src/shared/interfaces/blogPost.interface';
 
 @Component({
   selector: 'app-home',
@@ -7,12 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   currentYear : Number | undefined;
-
-  constructor() { }
+  blogPostList: BlogPost; 
+  constructor(private blogPostService: BlogpostService,) { }
 
   ngOnInit(): void {
     this.currentYear = (new Date()).getFullYear();
-
+    this.getAllBlogPosts();
     document.addEventListener('DOMContentLoaded', () => {
       const customNavbarToggle = document.getElementById('customNavbarToggle');
       const customNavbarLinks = document.getElementById('customNavbarLinks');
@@ -20,8 +22,7 @@ export class HomeComponent implements OnInit {
       customNavbarToggle?.addEventListener('click', () => {
         customNavbarLinks?.classList.toggle('show');
       });
-
-      // Hide the navbar links when clicking outside the navbar on smaller screens
+      
       document.addEventListener('click', (event) => {
         const targetElement = event.target as HTMLElement;
         if (!targetElement.closest('.custom-navbar') && customNavbarLinks?.classList.contains('show')) {
@@ -29,6 +30,13 @@ export class HomeComponent implements OnInit {
         }
       });
     });
+  }
+
+  getAllBlogPosts(){
+    this.blogPostService.getAll().subscribe(result=>{
+      this.blogPostList = result as any;
+      console.log(this.blogPostList)
+    })
   }
 
 }

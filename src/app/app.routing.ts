@@ -6,17 +6,25 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { HomeComponent } from './home/home.component';
+import { PostComponent } from './pages/post/post.component';
+import { TaggedPostsComponent } from './pages/tagged-posts/tagged-posts.component';
 
 const routes: Routes =[
   {
     path: '',
-    redirectTo: 'dashboard',
+    redirectTo: 'home',
     pathMatch: 'full',
   },
   
   {
     path: 'home',
     component: HomeComponent
+  },  {
+    path: 'post/:url',
+    component: PostComponent
+  },  {
+    path: 'tagged-posts/:tag',
+    component: TaggedPostsComponent
   }, {
     path: '',
     component: AdminLayoutComponent,

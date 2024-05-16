@@ -1,0 +1,106 @@
+<nav class="custom-navbar">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-1" style="vertical-align: middle;">
+				<div class="custom-navbar-logo" style="color:white !important">TWJ</div>
+			</div>
+			<div class="col-xs-11"style="vertical-align: middle; margin-top: 6px;">
+				<ul class="custom-navbar-links" id="customNavbarLinks">
+					<li><a href="#">Home</a></li>
+					<li><a href="#">About</a></li>
+					<li><a href="#">Services</a></li>
+					<li><a href="#">Contact</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+  </nav>
+
+  <div class="container">
+    <div class="content">
+        <div class="row">
+
+        </div>
+            <div class="blog-post-content">
+                <div class="row">                    
+                    <div class="col-lg-9">         
+                        <div class="author">
+                            <span class="meta-footer-thumb">
+								<a href="author.html"><img class="author-thumb" [src]="blogPost?.authorImage" [alt]="blogPost?.authorName"></a>
+                            </span>
+                            <span class="author-meta">
+                                <span class="post-name"><a href="author.html">By {{blogPost?.authorName}}</a></span><br/>
+                                <span class="post-date">{{ blogPost?.createdAt | date: 'longDate' }}</span>
+                            </span>
+                        </div>                        
+                        <img class="blog-post-image" [src]="blogPost?.image" alt="">
+                        <div *ngIf="blogPost" [innerHTML]="getSafeHtml(blogPost.content)"></div>
+                        <div class="tags">
+                            <div *ngIf="tags.length > 0">
+                                <div *ngFor="let tag of tags" class="tag-box" (click)="getBlogPostsByTagName(tag)">
+                                  {{ tag }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 related-blog-posts">
+                        <div *ngIf="isLargeScreen">
+                            <div *ngFor="let post of blogPostList" class="related-post-card">
+                                <a class="related-post-title-link" [routerLink]="['/post', post.url]">
+                                    <img src="{{ post.image }}" alt="" class="related-post-image">
+                                    <h2 class="related-post-title">{{ post.title }}</h2>
+                                </a>
+                            </div>
+                            <div class="newsletter-container">
+                                <p class="newsletter-text">Subscribe to our blog and receive weekly updates.</p>
+                                <form [formGroup]="newsletterForm" (ngSubmit)="subscribe()" class="newsletter-form">
+                                    <input
+                                      formControlName="email"
+                                      class="newsletter-email"
+                                      type="email"
+                                      placeholder="Email Address*"
+                                      required
+                                    >
+                                    <div *ngIf="newsletterForm.get('email').invalid && (newsletterForm.get('email').dirty || newsletterForm.get('email').touched)" class="error-msg">
+                                      <small *ngIf="newsletterForm.get('email').errors?.required">Email is required.</small>
+                                      <small *ngIf="newsletterForm.get('email').errors?.email">Please enter a valid email.</small>
+                                    </div>
+                                    <small class="message-success" *ngIf="showSuccessMessage && !(newsletterForm.get('email').invalid && (newsletterForm.get('email').dirty || newsletterForm.get('email').touched))">{{responseMessage}}</small>
+                                    <button type="submit" class="submit-btn">SUBSCRIBE</button>
+                                  </form>                                  
+                              </div>
+                        </div>
+
+                        <div *ngIf="!isLargeScreen">
+                            <div *ngFor="let post of blogPostList" class="card card-sm">
+                                <div class="row">
+                                    <div class="col-md-5 wrapthumbnail">
+                                        <a [routerLink]="['/post', post.url]">
+                                            <img style="width:100%;" [src]="post.image" class="thumbnail" alt="Post Image">
+                                        </a>
+                                    </div>
+                                    
+                                    <div class="col-md-7">
+                                        <div class="card-block">
+                                            <h4 class="card-title"><a class="card-title-link" [routerLink]="['/post', post.url]">{{ post.title.length > 120 ? (post.title | slice:0:120) + '...' : post.title }}</a></h4>
+                                            <div class="metafooter">
+                                                <div class="wrapfooter">
+                                                    <span class="meta-footer-thumb">
+                                                    <a href="author.html"><img class="author-thumb" [src]="post?.authorImage" [alt]="post?.authorName"></a>
+                                                    </span>
+                                                    <span class="author-meta">
+                                                        <span class="post-name-sm"><a class="card-title-link" href="author.html">{{post?.authorName}}</a></span><br/>
+                                                        <span class="post-date-sm">{{ post.createdAt | date: 'longDate' }}</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+  </div>

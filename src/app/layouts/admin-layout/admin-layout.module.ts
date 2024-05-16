@@ -12,7 +12,18 @@ import { MapsComponent } from '../../pages/maps/maps.component';
 import { UserProfileComponent } from '../../pages/user-profile/user-profile.component';
 import { TablesComponent } from '../../pages/tables/tables.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-// import { ToastrModule } from 'ngx-toastr';
+import { BlogPostsComponent } from 'src/app/pages/blog-posts/blog-posts.component';
+import { TemplatesComponent } from 'src/app/pages/templates/templates.component';
+import { TemplatesCreateComponent } from 'src/app/pages/templates-create/templates-create.component';
+import { TemplatesEditComponent } from 'src/app/pages/templates-edit/templates-edit.component';
+import { ProductsComponent } from 'src/app/pages/products/products.component';
+import { ProductsCreateComponent } from 'src/app/pages/products-create/products-create.component';
+import { ProductsEditComponent } from 'src/app/pages/products-edit/products-edit.component';
+import { BlogPostsCreateComponent } from 'src/app/pages/blog-posts-create/blog-posts-create.component';
+import { GenericTableComponent } from '../generic-table/generic-table.component';
+import { GenericDropdownComponent } from '../generic-dropdown/generic-dropdown.component';
+import { GenericMultiDropdownComponent } from '../generic-multi-dropdown/generic-multi-dropdown.component';
+import { ProductsCategoryCreateComponent } from 'src/app/pages/products-category-create/products-category-create.component';
 
 @NgModule({
   imports: [
@@ -28,7 +39,24 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     UserProfileComponent,
     TablesComponent,
     IconsComponent,
-    MapsComponent
+    MapsComponent,
+    BlogPostsComponent,
+    TemplatesComponent,
+    TemplatesCreateComponent,
+    TemplatesEditComponent,
+    ProductsComponent,
+    ProductsCreateComponent,
+    ProductsEditComponent,
+    ProductsCategoryCreateComponent,
+    BlogPostsCreateComponent,
+    GenericTableComponent,
+    GenericDropdownComponent,
+    GenericMultiDropdownComponent
+  ],
+  exports: [
+    GenericTableComponent,
+    GenericDropdownComponent,
+    GenericMultiDropdownComponent
   ]
 })
 

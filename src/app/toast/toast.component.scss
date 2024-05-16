@@ -1,0 +1,38 @@
+#toast-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+}
+
+.toast {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    padding: 10px 20px;
+    color: white;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    opacity: 0.9;
+    min-width: 250px; 
+}
+
+.toast-message {
+    flex-grow: 1; 
+}
+
+.toast-close {
+    margin-left: 20px; 
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+}
+
+.success {
+    background-color: #4CAF50;
+}
+
+.error {
+    background-color: #F44336;
+}
