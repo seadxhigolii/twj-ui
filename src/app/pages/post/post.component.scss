@@ -147,11 +147,22 @@
     object-fit: cover; 
 }
 
+.author-name-title:hover {
+	text-decoration: none !important;
+}
+
 .related-post-title {
     margin: 10px; 
     font-size: 1rem; 
     text-decoration: none; 
     color: black; 
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.acfU3b1AHX {
+	text-decoration: none; 
+	color: rgb(147,184,116) !important;
+	font-weight: 700;
 }
 
 .related-post-title-link:hover {
@@ -273,9 +284,13 @@
     align-items: flex-start;
 }
 
-.iRTWT8nXBC {
+.nWQRd354Je {
     width: 150px; 
     height: 150px; 
+}
+
+.iRTWT8nXBC {
+	width: 100%;
     margin-right: 20px; 
 }
 
@@ -442,10 +457,17 @@
 		margin-top: 30px !important;
 	}
 
-	.nWQRd354Je {
-		width: 100%;
-		text-align: center;
+	.parent-nWQRd354Je {
+		display: flex;
 		justify-content: center;
+		width: 150px; 
+    	height: 150px; 
+	}
+
+	.nWQRd354Je {
+		width: 150px;
+		text-align: center;
+		margin: 0 auto;
 	}
 }
 
