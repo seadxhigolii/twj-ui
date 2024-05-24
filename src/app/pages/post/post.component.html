@@ -17,13 +17,19 @@
   </nav>
 
   <div class="container">
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="ce6RRN8pNM">
+                <a *ngIf="topBanner" [href]="topBanner.finalUrl" target="_blank">
+                    <img [src]="topBanner.imageUrl" alt="Top Banner">
+                </a> 
+            </div>
+          </div>
+    </div>
     <div class="content">
-        <div class="row">
-
-        </div>
             <div class="blog-post-content">
                 <div class="row">                    
-                    <div class="col-lg-9">         
+                    <div class="col-lg-9">
                         <div class="author">
                             <span class="meta-footer-thumb">
 								<a href="author.html"><img class="author-thumb" [src]="blogPost?.authorImage" [alt]="blogPost?.authorName"></a>
@@ -44,7 +50,7 @@
                         </div>
                     </div>
                     <div class="col-lg-3 related-blog-posts">
-                        <div *ngIf="isLargeScreen">
+                        <div *ngIf="isLargeScreen">     
                             <div *ngFor="let post of blogPostList" class="related-post-card">
                                 <a class="related-post-title-link" [routerLink]="['/post', post.url]">
                                     <img src="{{ post.image }}" alt="" class="related-post-image">
@@ -55,19 +61,24 @@
                                 <p class="newsletter-text">Subscribe to our blog and receive weekly updates.</p>
                                 <form [formGroup]="newsletterForm" (ngSubmit)="subscribe()" class="newsletter-form">
                                     <input
-                                      formControlName="email"
-                                      class="newsletter-email"
-                                      type="email"
-                                      placeholder="Email Address*"
-                                      required
+                                    formControlName="email"
+                                    class="newsletter-email"
+                                    type="email"
+                                    placeholder="Email Address*"
+                                    required
                                     >
                                     <div *ngIf="newsletterForm.get('email').invalid && (newsletterForm.get('email').dirty || newsletterForm.get('email').touched)" class="error-msg">
-                                      <small *ngIf="newsletterForm.get('email').errors?.required">Email is required.</small>
-                                      <small *ngIf="newsletterForm.get('email').errors?.email">Please enter a valid email.</small>
+                                    <small *ngIf="newsletterForm.get('email').errors?.required">Email is required.</small>
+                                    <small *ngIf="newsletterForm.get('email').errors?.email">Please enter a valid email.</small>
                                     </div>
                                     <small class="message-success" *ngIf="showSuccessMessage && !(newsletterForm.get('email').invalid && (newsletterForm.get('email').dirty || newsletterForm.get('email').touched))">{{responseMessage}}</small>
                                     <button type="submit" class="submit-btn">SUBSCRIBE</button>
-                                  </form>                                  
+                                </form>                                  
+                            </div>                       
+                            <div class="HSGUKCAolP">
+                                <a *ngIf="rightBanner" [href]="rightBanner.finalUrl" target="_blank">
+                                    <img [src]="rightBanner.imageUrl" alt="Right Banner" style="width:100%">
+                                </a>                                
                               </div>
                         </div>
 

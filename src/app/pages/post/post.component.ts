@@ -7,6 +7,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NewsLetterSubscriber } from 'src/shared/interfaces/newsLetterSubscriber.interface';
 import { NewsLetterSubscriberService } from 'src/app/services/newslettersubscriber.service';
 import { Response } from 'src/shared/interfaces/responses/response.interface';
+import { BannerService } from 'src/app/services/banner.service';
+import { Banner } from 'src/shared/interfaces/banner.interface';
 
 @Component({
   selector: 'app-post',
@@ -23,12 +25,16 @@ export class PostComponent implements OnInit {
   newsletterForm: FormGroup;
   responseMessage : string = '';
   showSuccessMessage : boolean = false;
+  bannerList: Banner[];
+  topBanner: Banner | undefined;
+  rightBanner: Banner | undefined;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private blogPostService: BlogpostService,
     private sanitizer: DomSanitizer,
     private newsLetterSubscriberService: NewsLetterSubscriberService,
+    private bannerService: BannerService,
     private router: Router,
   ) { 
     this.isLargeScreen = window.innerWidth > 991;
@@ -49,6 +55,7 @@ export class PostComponent implements OnInit {
     window.scrollTo(0, 0);
     this.getBlogPost();
     this.getRelatedPosts();
+    this.getRandomBanners();
   }
 
   getBlogPost() {
@@ -104,6 +111,15 @@ export class PostComponent implements OnInit {
         }
       );
     }
+  }
+
+  getRandomBanners() {
+    this.bannerService.getRandom().subscribe(result=>{
+      this.bannerList = result; 
+      console.log("this.bannerList: ",this.bannerList)
+      this.topBanner = this.bannerList.find(banner => banner.position === 'Top');
+      this.rightBanner = this.bannerList.find(banner => banner.position === 'Right');
+    })
   }
 
 }

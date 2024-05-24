@@ -1,6 +1,6 @@
 .custom-navbar {
-	background: rgb(44,32,223);
-	background: linear-gradient(90deg, rgba(44,32,223,1) 0%, rgba(44,32,223,1) 41%, rgba(9,9,121,1) 71%, rgba(2,0,36,1) 100%);
+	background: rgb(147,184,116);
+	background: linear-gradient(90deg, rgba(147,184,116,1) 0%, rgba(140,177,109,1) 0%, rgba(61,99,28,1) 100%);
 	color: #fff;
 	display: flex;
 	align-items: center;
@@ -15,6 +15,35 @@
   .container { 
 	color: #525F7F !important;
 	font-family: Georgia, sans-serif, arial !important;
+  }
+
+  .ce6RRN8pNM-span {
+	font-size: 9px;
+	margin-bottom: 20px;
+	width: 100%;
+	text-align: right;
+	justify-content: right;
+	font-family: Arial, Helvetica, sans-serif;
+	letter-spacing: 1px;
+  }
+
+  .ce6RRN8pNM span {
+  }
+
+  .ce6RRN8pNM {
+	margin-top: 20px;
+	border: 1px solid rgb(218 218 218);
+  }
+
+	.ce6RRN8pNM img {
+		width: 100%;
+		height: auto;
+	}
+
+  .HSGUKCAolP {
+	height: fit-content;
+	width: fit-content;
+	border: 1px solid rgb(218 218 218);
   }
   
   .custom-navbar-logo {
@@ -86,6 +115,7 @@
 
   .post-name-sm {
 	font-size: 14px;
+	font-family: Arial, Helvetica, sans-serif;
   }
 
   .post-date-sm {
@@ -186,8 +216,8 @@
 }
 
 .q63fh1n5n6 {
-	background: rgb(44,32,223);
-	background: linear-gradient(90deg, rgba(44,32,223,1) 0%, rgba(44,32,223,1) 41%, rgba(9,9,121,1) 71%, rgba(2,0,36,1) 100%);
+	background: rgb(147,184,116);
+	background: linear-gradient(90deg, rgba(147,184,116,1) 0%, rgba(140,177,109,1) 0%, rgba(61,99,28,1) 100%);
 	color: white !important; 
 	padding: 12px 20px !important; 
 	font-weight: bold !important; 
@@ -217,12 +247,13 @@
 
 .woi1dxuc1l {
 	font-weight: bold !important; 
-	color: #2C20DF !important; 
+	color: rgb(140, 177, 109) !important; 
 	margin-right: 5px !important;
 }
 
 .t7aluspha4 {
-	background-color: #2C20DF !important; 
+	background: rgb(147,184,116) !important;
+	border-color: rgb(147,184,116) !important;
 	color: white; 
 	padding: 10px 20px !important; 
 	text-decoration: none !important; 
@@ -290,7 +321,7 @@
 }
 
 .backlink-cvzejg3k6w {
-	color: #2C20DF !important; 
+	color: rgb(140, 177, 109) !important; 
 	font-style: italic;
 }
 
@@ -339,7 +370,7 @@
 .newsletter-text {
     margin-bottom: 15px;
     font-size: 0.9em;
-	color:#2C20DF;
+	color:rgb(140, 177, 109);
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 18px;
 	font-weight: 500;
@@ -362,8 +393,8 @@
 }
 
 .newsletter-form button.submit-btn {
-    background-color: #2c20df;
-    border: 2px solid #2c20df;
+    background-color: rgb(140, 177, 109);
+    border: 2px solid rgb(140, 177, 109);
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     border-radius: 6px;
