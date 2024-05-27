@@ -1,20 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { BlogpostService } from '../services/blogpost.service';
+import { BlogpostService } from 'src/app/services/blogpost.service';
 import { BlogPost } from 'src/shared/interfaces/blogPost.interface';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss','../../shared/bootstrap.min.css','../../shared/homestyle.scss']
+  selector: 'app-all-posts',
+  templateUrl: './all-posts.component.html',
+  styleUrls: ['./all-posts.component.scss','../../../shared/bootstrap.min.css','../../../shared/homestyle.scss']
 })
-export class HomeComponent implements OnInit {
+export class AllPostsComponent implements OnInit {
   currentYear : Number | undefined;
-  blogPostList: BlogPost; 
-  constructor(private blogPostService: BlogpostService,) { }
+  blogPostList: BlogPost[] = [];
+  currentPage: number = 1;
+  pageSize: number = 4;
+  totalPages: number = 1;
+  constructor(private blogPostService: BlogpostService) { }
 
   ngOnInit(): void {
     this.currentYear = (new Date()).getFullYear();
-    this.getAllBlogPosts();
+    this.getFilteredBlogPosts(this.currentPage);
     document.addEventListener('DOMContentLoaded', () => {
       const customNavbarToggle = document.getElementById('customNavbarToggle');
       const customNavbarLinks = document.getElementById('customNavbarLinks');
@@ -38,4 +41,17 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  getFilteredBlogPosts(page: number) {
+    this.blogPostService.getFiltered(page, this.pageSize).subscribe(result => {
+      this.blogPostList = result.data;
+      this.totalPages = result.totalPages;
+    }, error => {
+      console.error('Error fetching blog posts:', error);
+    });
+  }
+
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getFilteredBlogPosts(this.currentPage);
+  }
 }

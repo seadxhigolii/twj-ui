@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from '@angular/common/http';
+import { Observable, catchError, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { BlogPostDTO } from 'src/shared/dto/blog-post.dto';
 import { BlogPost } from 'src/shared/interfaces/blogPost.interface';
@@ -26,9 +26,34 @@ export class BlogpostService {
     return headers;
   }
 
+  private handleError(error: HttpErrorResponse) {
+    if (error.status === 404 || error.status === 500) {
+      return throwError(error);
+    } else {
+      return throwError('An unexpected error occurred.');
+    }
+  }
+
+  getByUrl(url: string): Observable<BlogPost> {
+    const headers = this.createHeaders();
+    const params = new HttpParams().set('URL', url);
+    return this.http.get<BlogPost>(`${this.backendUrl}/BlogPost/GetByUrl`, { params, headers })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   getAll(): Observable<Response> {
     const headers = this.createHeaders();
     return this.http.get<Response>(this.backendUrl + '/BlogPost/GetAll', { headers });
+  }
+
+  getFiltered(page: number, pageSize: number): Observable<any> {
+    const headers = this.createHeaders();
+    let params = new HttpParams();
+    params = params.append('Page', page.toString());
+    params = params.append('PageSize', pageSize.toString());
+    return this.http.get<any>(`${this.backendUrl}/BlogPost/GetFiltered`, { headers, params });
   }
 
   getById(id:string): Observable<Response> {
@@ -36,15 +61,9 @@ export class BlogpostService {
     return this.http.get<Response>(this.backendUrl + '/BlogPost/GetById/'+id, { headers });
   }
 
-  getByUrl(url: string): Observable<BlogPost> {
-    const headers = this.createHeaders();
-    const params = new HttpParams().set('URL', url);
-    return this.http.get<BlogPost>(`${this.backendUrl}/BlogPost/GetByUrl`, { params, headers });
-  }
-
   getRelated(url: string): Observable<BlogPost[]> {
     const headers = this.createHeaders();
-    const params = new HttpParams().set('URL', url);
+    let params = new HttpParams().set('URL', url);
     return this.http.get<BlogPost[]>(`${this.backendUrl}/BlogPost/GetRelated`, { params, headers });
   }
   

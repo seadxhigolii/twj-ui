@@ -37,7 +37,6 @@ export class ProductsComponent implements OnInit {
   }
 
   loadData(): void {
-    console.log(this.filterRequest)
     this.productsService.getFiltered(this.filterRequest).subscribe(response => {
       this.productList = response.data;
       this.totalPages = response.totalPages;

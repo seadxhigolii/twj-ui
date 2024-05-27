@@ -8,7 +8,8 @@ import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component
 import { HomeComponent } from './home/home.component';
 import { PostComponent } from './pages/post/post.component';
 import { TaggedPostsComponent } from './pages/tagged-posts/tagged-posts.component';
-
+import { ErrorPageComponent } from './pages/error-page/error-page.component';
+import { AllPostsComponent } from './pages/all-posts/all-posts.component';
 const routes: Routes =[
   {
     path: '',
@@ -22,9 +23,15 @@ const routes: Routes =[
   },  {
     path: 'post/:url',
     component: PostComponent
-  },  {
+  }, {
+    path: 'error-page',
+    component: ErrorPageComponent
+  }, {
     path: 'tagged-posts/:tag',
     component: TaggedPostsComponent
+  }, {
+    path: 'all-posts',
+    component: AllPostsComponent
   }, {
     path: '',
     component: AdminLayoutComponent,

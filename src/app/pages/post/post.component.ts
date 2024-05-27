@@ -1,5 +1,5 @@
 import { Component, HostListener, OnInit, ViewEncapsulation  } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { BlogpostService } from '../../services/blogpost.service';
 import { BlogPost } from 'src/shared/interfaces/blogPost.interface';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
@@ -9,6 +9,7 @@ import { NewsLetterSubscriberService } from 'src/app/services/newslettersubscrib
 import { Response } from 'src/shared/interfaces/responses/response.interface';
 import { BannerService } from 'src/app/services/banner.service';
 import { Banner } from 'src/shared/interfaces/banner.interface';
+import { ViewportScroller } from '@angular/common';
 
 @Component({
   selector: 'app-post',
@@ -36,6 +37,7 @@ export class PostComponent implements OnInit {
     private newsLetterSubscriberService: NewsLetterSubscriberService,
     private bannerService: BannerService,
     private router: Router,
+    private viewportScroller: ViewportScroller
   ) { 
     this.isLargeScreen = window.innerWidth > 991;
     this.newsletterForm = new FormGroup({
@@ -52,7 +54,7 @@ export class PostComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    window.scrollTo(0, 0);
+    this.scrollToTop();
     this.getBlogPost();
     this.getRelatedPosts();
     this.getRandomBanners();
@@ -68,6 +70,9 @@ export class PostComponent implements OnInit {
             if (this.blogPost && this.blogPost.tags) {
               this.tags = this.blogPost.tags.split(',').map(tag => tag.trim());
             }
+          },
+          error => {
+            this.router.navigate(['error-page']);
           }
         );
       }
@@ -80,8 +85,8 @@ export class PostComponent implements OnInit {
       if (url) {
         this.blogPostService.getRelated(url).subscribe(
           result => {
-            this.blogPostList = result;
-            console.log(this.blogPostList)
+            this.blogPostList = result.filter(post => post.url !== url);
+            console.log("this.blogPostList: ",this.blogPostList)
           }
         );
       }
@@ -116,10 +121,16 @@ export class PostComponent implements OnInit {
   getRandomBanners() {
     this.bannerService.getRandom().subscribe(result=>{
       this.bannerList = result; 
-      console.log("this.bannerList: ",this.bannerList)
       this.topBanner = this.bannerList.find(banner => banner.position === 'Top');
       this.rightBanner = this.bannerList.find(banner => banner.position === 'Right');
     })
   }
 
+  scrollToTop() {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.viewportScroller.scrollToPosition([0, 0]);
+      }
+    });
+  }
 }

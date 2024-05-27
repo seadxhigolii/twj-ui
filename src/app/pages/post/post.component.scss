@@ -136,6 +136,10 @@
     max-width: 300px; 
 }
 
+.newsletter-container-and-banner {
+	position: sticky !important;
+}
+
 .related-post-card {
     border: 1px solid #ddd;
     margin-bottom: 20px; 
@@ -291,6 +295,7 @@
 
 .iRTWT8nXBC {
 	width: 100%;
+    max-height: 167px !important;
     margin-right: 20px; 
 }
 
@@ -299,6 +304,7 @@
 	font-size:40px !important; 
 	color: #333333 !important;
 	font-weight: 700;
+    margin-top: 33px !important;
 }
 
 .cw5zqvh8ls {
@@ -435,7 +441,112 @@
 	margin-top: -10px;
 }
 
+// INTRODUCTION
+
+.sQxpAj1VQF p {
+	font-size: 18px !important;
+    font-family: Georgia, sans-serif, arial;
+    line-height: 34px !important;
+    color: #333333;
+}
+
+.sQxpAj1VQF ul {
+	font-size: 18px !important;
+    font-family: Georgia, sans-serif, arial !important;
+    color: #333333 !important;
+}
+.sQxpAj1VQF li {
+	font-size: 18px !important;
+    font-family: Georgia, sans-serif, arial !important;
+    color: #333333 !important;
+}
+
+.sQxpAj1VQF strong {
+	font-size: 18px !important;
+    font-family: Georgia, sans-serif, arial !important;
+    color: #333333 !important;
+	font-weight: 700 !important;
+}
+
+.related-post-card .related-post-title {
+	margin: 10px !important;
+    font-size: 1rem !important;
+    text-decoration: none !important;
+    color: black !important;
+    font-family: Arial, Helvetica, sans-serif !important;
+}
+// END OF INTRODUCTION
+
+// MAIN CONTENT
+
+:host .nm4JsSMWGj h1,h2,h3,h4,h5,h6{
+	font-family: Segoe UI, Roboto, sans-serif !important;
+    color: #333330 !important;
+    font-weight: 600 !important;
+}
+
+.nm4JsSMWGj p {
+	font-size: 18px !important;
+    font-family: Georgia, sans-serif, arial;
+    line-height: 34px !important;
+    color: #333333;
+}
+
+.nm4JsSMWGj ul {
+	font-size: 18px !important;
+    font-family: Georgia, sans-serif, arial !important;
+    color: #333333 !important;
+}
+.nm4JsSMWGj li {
+	font-size: 18px !important;
+    font-family: Georgia, sans-serif, arial !important;
+    color: #333333 !important;
+}
+
+.nm4JsSMWGj strong {
+	font-size: 18px !important;
+    font-family: Georgia, sans-serif, arial !important;
+    color: #333333 !important;
+}
+
+// END OF MAIN CONTENT
+
+// CALL TO ACTION
+
+.pJDcMLp9xo p {
+	font-size: 18px !important;
+    font-family: Georgia, sans-serif, arial;
+    line-height: 34px !important;
+    color: #333333;
+}
+
+.pJDcMLp9xo ul {
+	font-size: 18px !important;
+    font-family: Georgia, sans-serif, arial !important;
+    color: #333333 !important;
+}
+.pJDcMLp9xo li {
+	font-size: 18px !important;
+    font-family: Georgia, sans-serif, arial !important;
+    color: #333333 !important;
+}
+
+.pJDcMLp9xo strong {
+	font-size: 18px !important;
+    font-family: Georgia, sans-serif, arial !important;
+    color: #333333 !important;
+	font-weight: 700 !important;
+}
+// END OF CALL TO ACTION
+
+
 @media (max-width: 991.98px) {
+	.g2bax8o6vA {
+		font-family: Arial !important;
+    	font-size: 21px !important; 
+		margin-bottom: 45px !important;
+	}
+
     .newsletter-container {
         margin-bottom: 15px;
     }

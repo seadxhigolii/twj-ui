@@ -75,7 +75,6 @@ export class ProductsCreateComponent implements OnInit {
       description: this.product.description, 
       image: this.product.image, 
       categoryId: this.product.categoryId,
-      // vendorName: this.product.vendorName,
       affiliateLink: this.product.affiliateLink
     };
 
@@ -85,7 +84,6 @@ export class ProductsCreateComponent implements OnInit {
       },
       (error) => {
         
-        console.log('Error occurred:', error);
       }
     );
   }

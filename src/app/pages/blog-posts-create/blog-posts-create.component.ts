@@ -105,7 +105,6 @@ export class BlogPostsCreateComponent implements OnInit {
   initializeSEOKeywords() {
     this.seoKeywordService.getAll().subscribe(result =>{
       this.seoKeywordList = result as SEOKeyowrdDTO[];
-      console.log(this.seoKeywordList);
     })
   }
 
@@ -125,11 +124,7 @@ export class BlogPostsCreateComponent implements OnInit {
       lengthPreference: this.selectedLength,
     };
     
-    // this.blogPostService.generateSEOFocused().subscribe(response=>{
-    //   console.log(response)
-    // });
     this.blogPostService.generateRandom().subscribe(response=>{
-      console.log(response)
     });
   }
 }

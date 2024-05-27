@@ -24,7 +24,6 @@ export class TemplatesComponent implements OnInit {
 
   ngOnInit(): void {
     this.templateService.getFiltered(this.filterRequest).subscribe(response=>{
-      console.log("response: ",response.data)
       this.templateList = response.data;
     });
   }
