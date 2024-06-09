@@ -10,6 +10,9 @@ import { PostComponent } from './pages/post/post.component';
 import { TaggedPostsComponent } from './pages/tagged-posts/tagged-posts.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { AllPostsComponent } from './pages/all-posts/all-posts.component';
+import { TagsComponent } from './pages/tags/tags.component';
+import { AuthorsComponent } from './pages/authors/authors.component';
+import { AuthorPostsComponent } from './pages/author-posts/author-posts.component';
 const routes: Routes =[
   {
     path: '',
@@ -26,6 +29,15 @@ const routes: Routes =[
   }, {
     path: 'error-page',
     component: ErrorPageComponent
+  }, {
+    path: 'tags',
+    component: TagsComponent
+  }, {
+    path: 'authors',
+    component: AuthorsComponent
+  }, {
+    path: 'author-posts/:authorName',
+    component: AuthorPostsComponent
   }, {
     path: 'tagged-posts/:tag',
     component: TaggedPostsComponent

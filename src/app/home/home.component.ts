@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BlogpostService } from '../services/blogpost.service';
 import { BlogPost } from 'src/shared/interfaces/blogPost.interface';
+import { CombinedBlogPostModel } from 'src/shared/interfaces/blogPost/combinedBlogPostModel.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -10,7 +12,10 @@ import { BlogPost } from 'src/shared/interfaces/blogPost.interface';
 export class HomeComponent implements OnInit {
   currentYear : Number | undefined;
   blogPostList: BlogPost; 
-  constructor(private blogPostService: BlogpostService,) { }
+  combinedBlogPostList: CombinedBlogPostModel; 
+  constructor(private blogPostService: BlogpostService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.currentYear = (new Date()).getFullYear();
@@ -33,9 +38,20 @@ export class HomeComponent implements OnInit {
   }
 
   getAllBlogPosts(){
-    this.blogPostService.getAll().subscribe(result=>{
-      this.blogPostList = result as any;
+    this.blogPostService.getTopTags().subscribe(result=>{
+      this.combinedBlogPostList = result as CombinedBlogPostModel;
     })
   }
 
+  viewAll() {
+    this.router.navigate(['all-posts']);
+  }
+
+  viewTagRelated(tagName: string) {
+    this.router.navigate(['tagged-posts/' + tagName.toLowerCase()]);
+  }
+
+  redirectToAuthorPosts(authorName: string) {
+    this.router.navigate(['author-posts/' + authorName]);    
+  }
 }

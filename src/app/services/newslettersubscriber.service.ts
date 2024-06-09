@@ -26,19 +26,18 @@ export class NewsLetterSubscriberService {
   }
 
   getAll(): Observable<NewsLetterSubscriber[]> {
-    const headers = this.createHeaders();
-    return this.http.get<NewsLetterSubscriber[]>(this.backendUrl + '/NewsLetterSubscriber/GetAll', { headers });
+    return this.http.get<NewsLetterSubscriber[]>(this.backendUrl + '/NewsLetterSubscriber/GetAll');
   }
 
   getById(id:string): Observable<NewsLetterSubscriber> {
-    const headers = this.createHeaders();
-    return this.http.get<NewsLetterSubscriber>(this.backendUrl + '/NewsLetterSubscriber/GetById/'+id, { headers });
+    return this.http.get<NewsLetterSubscriber>(this.backendUrl + '/NewsLetterSubscriber/GetById/'+id);
   }
   
   add(email: string): Observable<Response<boolean>> {
-    const headers = this.createHeaders();
+    let headers = new HttpHeaders();
     const body = JSON.stringify({ Email: email });
-    return this.http.post<Response<boolean>>(this.backendUrl + '/NewsLetterSubscriber/Add', body, { headers });
+    headers = headers.append('Content-Type', 'application/json');
+    return this.http.post<Response<boolean>>(this.backendUrl + '/NewsLetterSubscriber/Add', body, {headers});
   }
   
 }

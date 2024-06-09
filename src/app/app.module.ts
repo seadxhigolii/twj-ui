@@ -19,6 +19,10 @@ import { InterceptorService } from './http-interceptors/interceptor.service';
 import { ToastComponent } from './toast/toast.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { AllPostsComponent } from './pages/all-posts/all-posts.component';
+import { TagsComponent } from './pages/tags/tags.component';
+import { AuthorsComponent } from './pages/authors/authors.component';
+import { AuthorPostsComponent } from './pages/author-posts/author-posts.component';
+import { HomeNavbarComponent } from './layouts/home-navbar/home-navbar.component';
 
 
 
@@ -42,7 +46,11 @@ import { AllPostsComponent } from './pages/all-posts/all-posts.component';
     TaggedPostsComponent,
     ToastComponent,
     ErrorPageComponent,
-    AllPostsComponent
+    AllPostsComponent,
+    TagsComponent,
+    AuthorsComponent,
+    AuthorPostsComponent,
+    HomeNavbarComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },

@@ -1,0 +1,60 @@
+<app-home-navbar></app-home-navbar>
+  
+<div class="container">
+	<div class="row">
+        <div class="col-lg-12">
+            <div class="ce6RRN8pNM image-container">
+                <a *ngIf="topBanner" [href]="topBanner.finalUrl" target="_blank">
+                    <img [src]="topBanner.imageUrl" alt="Top Banner">
+                </a> 
+            </div>
+        </div>
+    </div>
+	<hr>
+    <div *ngIf="tagList.length > 0">
+		<h1 class="sitetitle">Tags</h1>
+        <div *ngFor="let tag of tagList; let i = index" class="row">
+            <div class="col-lg-6">
+                <div>
+                    <div (click)="getBlogPostsByTagName(tag.name)" class="tag-box">{{ tag.name }}</div><span (click)="getBlogPostsByTagName(tag.name)" style="color:grey; cursor: pointer;">{{ tag.postCount }} Articles</span>
+                </div>
+            </div>
+            <div *ngIf="tagList[i + 1]" class="col-lg-6">
+                <div>
+                    <div class="tag-box" (click)="getBlogPostsByTagName(tagList[i + 1].name)">{{ tagList[i+1].name }}</div><span style="color:grey; cursor: pointer;" (click)="getBlogPostsByTagName(tagList[i + 1].name)">{{ tagList[i + 1].postCount }} Articles</span>
+                </div>
+            </div>
+            <ng-container *ngIf="tagList[i + 1]">
+                <ng-container *ngIf="i % 2 == 0; else emptyBlock"></ng-container>
+            </ng-container>
+            <ng-template #emptyBlock></ng-template>
+        </div>
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="pagination d-flex justify-content-center">
+					<button class="btn-custom btn-sm" (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">
+					  Previous
+					</button>
+					<span class="px-3">Page {{ currentPage }} of {{ totalPages }}</span>
+					<button class="btn-custom btn-sm" (click)="onPageChange(currentPage + 1)" [disabled]="currentPage === totalPages">
+					  Next
+					</button>
+				</div>
+			</div>
+		</div>
+    </div>
+	<hr>
+	<div class="footer">
+		<div class="container">
+			<p class="pull-left">
+				 Copyright &copy; {{currentYear}} The Wellness Junction
+			</p>
+			<p class="pull-right">
+				 Theme by <b>TheWellnessJunction</b>
+			</p>
+			<div class="clearfix">
+			</div>
+		</div>
+	</div>
+</div>
+

@@ -1,20 +1,4 @@
-<nav class="custom-navbar">
-	<div class="container">
-		<div class="row">
-			<div class="col-xs-1" style="vertical-align: middle;">
-				<div class="custom-navbar-logo" style="color:white !important">TWJ</div>
-			</div>
-			<div class="col-xs-11"style="vertical-align: middle; margin-top: 6px;">
-				<ul class="custom-navbar-links" id="customNavbarLinks">
-					<li><a href="#">Home</a></li>
-					<li><a href="#">About</a></li>
-					<li><a href="#">Services</a></li>
-					<li><a href="#">Contact</a></li>
-				</ul>
-			</div>
-		</div>
-	</div>
-  </nav>
+<app-home-navbar></app-home-navbar>
 
   <div class="container">
     <div class="row">
@@ -24,7 +8,7 @@
                     <img [src]="topBanner.imageUrl" alt="Top Banner">
                 </a> 
             </div>
-          </div>
+        </div>
     </div>
     <div class="content">
         <div class="blog-post-content">
@@ -32,10 +16,10 @@
                 <div class="col-lg-9">
                     <div class="author">
                         <span class="meta-footer-thumb">
-                            <a href="author.html"><img class="author-thumb" [src]="blogPost?.authorImage" [alt]="blogPost?.authorName"></a>
+                            <a style="cursor:pointer;" (click)="redirectToAuthorPosts(blogPost?.authorName)"><img class="author-thumb" [src]="blogPost?.authorImage" [alt]="blogPost?.authorName"></a>
                         </span>
                         <span class="author-meta">
-                            <span class="post-name"><a href="author.html">By {{blogPost?.authorName}}</a></span><br/>
+                            <span style="cursor:pointer;" (click)="redirectToAuthorPosts(blogPost?.authorName)" class="post-name"><a>By {{blogPost?.authorName}}</a></span><br/>
                             <span class="post-date">{{ blogPost?.createdAt | date: 'longDate' }}</span>
                         </span>
                     </div>                        

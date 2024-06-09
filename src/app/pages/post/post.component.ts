@@ -86,7 +86,6 @@ export class PostComponent implements OnInit {
         this.blogPostService.getRelated(url).subscribe(
           result => {
             this.blogPostList = result.filter(post => post.url !== url);
-            console.log("this.blogPostList: ",this.blogPostList)
           }
         );
       }
@@ -132,5 +131,9 @@ export class PostComponent implements OnInit {
         this.viewportScroller.scrollToPosition([0, 0]);
       }
     });
+  }
+
+  redirectToAuthorPosts(authorName: string) {
+    this.router.navigate(['/author-posts', authorName]);
   }
 }

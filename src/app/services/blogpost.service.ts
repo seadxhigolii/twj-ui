@@ -5,6 +5,10 @@ import { environment } from 'src/environments/environment';
 import { BlogPostDTO } from 'src/shared/dto/blog-post.dto';
 import { BlogPost } from 'src/shared/interfaces/blogPost.interface';
 import { BlogPostResponse } from 'src/shared/interfaces/responses/blogPostResponse.interface';
+import { CombinedBlogPostModel } from 'src/shared/interfaces/blogPost/combinedBlogPostModel.interface';
+import { GetFilteredBlogPostModel } from 'src/shared/interfaces/blogPost/getFilteredBlogPostModel.interface';
+import { FilterResponse } from 'src/shared/interfaces/responses/filter/filterResponse.interface';
+import { GetByAuthorFilteredModel } from 'src/shared/interfaces/blogPost/getByAuthorFilteredModel.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -48,12 +52,26 @@ export class BlogpostService {
     return this.http.get<Response>(this.backendUrl + '/BlogPost/GetAll', { headers });
   }
 
+  getTopTags(): Observable<CombinedBlogPostModel> {
+    const headers = this.createHeaders();
+    return this.http.get<CombinedBlogPostModel>(this.backendUrl + '/BlogPost/GetTopTags', { headers });
+  }
+
   getFiltered(page: number, pageSize: number): Observable<any> {
     const headers = this.createHeaders();
     let params = new HttpParams();
     params = params.append('Page', page.toString());
     params = params.append('PageSize', pageSize.toString());
     return this.http.get<any>(`${this.backendUrl}/BlogPost/GetFiltered`, { headers, params });
+  }
+
+  getByAuthorFiltered(page: number, pageSize: number, authorName: string): Observable<FilterResponse<GetByAuthorFilteredModel>> {
+    const headers = this.createHeaders();
+    let params = new HttpParams();
+    params = params.append('Page', page.toString());
+    params = params.append('PageSize', pageSize.toString());
+    params = params.append('AuthorName', authorName);
+    return this.http.get<FilterResponse<GetByAuthorFilteredModel>>(`${this.backendUrl}/BlogPost/GetByAuthorFiltered`, { headers, params });
   }
 
   getById(id:string): Observable<Response> {
@@ -71,6 +89,15 @@ export class BlogpostService {
     const headers = this.createHeaders();
     const params = new HttpParams().set('Tag', tag);
     return this.http.get<BlogPost[]>(`${this.backendUrl}/BlogPost/GetByTagName`, { params, headers });
+  } 
+
+  getByTagNamePaginated(page: number, pageSize: number, tagName: string): Observable<FilterResponse<GetFilteredBlogPostModel>> {
+    const headers = this.createHeaders();
+    let params = new HttpParams();
+    params = params.append('Page', page.toString());
+    params = params.append('PageSize', pageSize.toString());
+    params = params.append('TagName', tagName.toString());
+    return this.http.get<any>(`${this.backendUrl}/BlogPost/GetFiltered`, { headers, params });
   }
   
   add(blogPost: BlogPostDTO): Observable<Response> {

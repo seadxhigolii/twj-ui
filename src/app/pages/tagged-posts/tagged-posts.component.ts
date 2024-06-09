@@ -1,13 +1,12 @@
 import { Component, HostListener, OnInit } from '@angular/core';
 import { BlogpostService } from 'src/app/services/blogpost.service';
-import { BlogPost } from 'src/shared/interfaces/blogPost.interface';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NewsLetterSubscriberService } from 'src/app/services/newslettersubscriber.service';
 import { BannerService } from 'src/app/services/banner.service';
-import { ViewportScroller } from '@angular/common';
 import { Response } from 'src/shared/interfaces/responses/response.interface';
 import { Banner } from 'src/shared/interfaces/banner.interface';
+import { GetFilteredBlogPostModel } from 'src/shared/interfaces/blogPost/getFilteredBlogPostModel.interface';
 
 @Component({
   selector: 'app-tagged-posts',
@@ -16,7 +15,7 @@ import { Banner } from 'src/shared/interfaces/banner.interface';
 })
 export class TaggedPostsComponent implements OnInit {
   currentYear : Number | undefined;
-  blogPostList: BlogPost; 
+  blogPostList: GetFilteredBlogPostModel[] = []; 
   tag: string = '';
   capitalizedTag: string = '';
   public isLargeScreen: boolean;
@@ -26,12 +25,17 @@ export class TaggedPostsComponent implements OnInit {
   bannerList: Banner[];
   topBanner: Banner | undefined;
   rightBanner: Banner | undefined;
+  currentPage: number = 1;
+  pageSize: number = 4;
+  totalPages: number = 1;
+  totalItems: number = 0;
 
   constructor(
     private blogPostService: BlogpostService,
     private route: ActivatedRoute,
     private newsLetterSubscriberService: NewsLetterSubscriberService,
-    private bannerService: BannerService) { 
+    private bannerService: BannerService,
+    private router: Router) { 
       this.isLargeScreen = window.innerWidth > 991;
       this.newsletterForm = new FormGroup({
         email: new FormControl('', [Validators.required, Validators.email]),
@@ -50,7 +54,7 @@ export class TaggedPostsComponent implements OnInit {
       const encodedTag = params.get('tag')!;
       this.tag = decodeURIComponent(encodedTag);
       this.capitalizedTag = this.capitalizeWord(this.tag);
-      this.getAllBlogPostsByTagName(this.tag);
+      this.getByTagNamePaginated(this.tag);
     });
 
     document.addEventListener('DOMContentLoaded', () => {
@@ -70,9 +74,11 @@ export class TaggedPostsComponent implements OnInit {
     });
   }
 
-  getAllBlogPostsByTagName(tag: string){
-    this.blogPostService.getByTagName(tag).subscribe(result=>{
-      this.blogPostList = result as any;
+  getByTagNamePaginated(tag: string){
+    this.blogPostService.getByTagNamePaginated(this.currentPage, this.pageSize, tag).subscribe(result=>{
+      this.blogPostList = result.data as GetFilteredBlogPostModel[];
+      this.totalPages = result.totalPages;
+      this.totalItems = result.totalItems;
     })
   }
 
@@ -106,6 +112,15 @@ export class TaggedPostsComponent implements OnInit {
         }
       );
     }
+  }
+  
+  onPageChange(page: number) {
+    this.currentPage = page;
+    this.getByTagNamePaginated(this.tag);
+  }
+
+  redirectToAuthorPosts(authorName: string) {
+    this.router.navigate(['author-posts/' + authorName]);    
   }
 
 }
