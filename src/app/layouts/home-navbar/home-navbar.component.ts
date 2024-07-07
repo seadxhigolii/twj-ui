@@ -13,7 +13,7 @@ export class HomeNavbarComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-  }  
+  }   
 
   redirectTo(page: string) {
     this.router.navigate([page.toLowerCase()]);

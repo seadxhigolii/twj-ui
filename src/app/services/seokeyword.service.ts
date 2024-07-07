@@ -16,21 +16,28 @@ export class SEOKeywordService {
 
     constructor(private http: HttpClient) { }
     
-    private createHeaders(userInitiated: boolean = false): HttpHeaders {
+    private createHeaders(options: { userInitiated?: boolean, contentType?: string } = {}): HttpHeaders {
         let headers = new HttpHeaders();
-        if (userInitiated) {
-            headers = headers.append('X-User-Initiated', 'true');
+        const token = localStorage.getItem('id_token');
+        if (token) {
+          headers = headers.append('Authorization', `Bearer ${token}`);
+        }
+        if (options.userInitiated) {
+          headers = headers.append('X-User-Initiated', 'true');
+        }
+        if (options.contentType) {
+          headers = headers.append('Content-Type', options.contentType);
         }
         return headers;
-    }
+  }
 
     getAll(): Observable<SEOKeyowrdDTO[]> {
-        const headers = this.createHeaders();
+        const headers = this.createHeaders({ userInitiated: false });    
         return this.http.get<SEOKeyowrdDTO[]>(`${this.backendUrl}/SEOKeyword/GetAll`, { headers });
     }
 
     getFiltered(filterRequest: FilterRequest): Observable<FilteredResponseDTO<SEOKeyowrd>> {
-        const headers = this.createHeaders();
+        const headers = this.createHeaders({ userInitiated: false });    
         const params = new HttpParams()
         .set('page', filterRequest.page.toString())
         .set('pageSize', filterRequest.pageSize.toString())

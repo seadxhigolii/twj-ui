@@ -12,17 +12,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
-import { HomeComponent } from './home/home.component';
-import { PostComponent } from './pages/post/post.component';
-import { TaggedPostsComponent } from './pages/tagged-posts/tagged-posts.component';
 import { InterceptorService } from './http-interceptors/interceptor.service';
 import { ToastComponent } from './toast/toast.component';
-import { ErrorPageComponent } from './pages/error-page/error-page.component';
-import { AllPostsComponent } from './pages/all-posts/all-posts.component';
-import { TagsComponent } from './pages/tags/tags.component';
-import { AuthorsComponent } from './pages/authors/authors.component';
-import { AuthorPostsComponent } from './pages/author-posts/author-posts.component';
-import { HomeNavbarComponent } from './layouts/home-navbar/home-navbar.component';
+import { BlogModule } from './pages/blog/blog.module';
+import { BlogPostEditComponent } from './pages/blog-post-edit/blog-post-edit.component';
 
 
 
@@ -35,22 +28,15 @@ import { HomeNavbarComponent } from './layouts/home-navbar/home-navbar.component
     NgbModule,
     RouterModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BlogModule 
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     AuthLayoutComponent,
-    HomeComponent,
-    PostComponent,
-    TaggedPostsComponent,
     ToastComponent,
-    ErrorPageComponent,
-    AllPostsComponent,
-    TagsComponent,
-    AuthorsComponent,
-    AuthorPostsComponent,
-    HomeNavbarComponent
+    BlogPostEditComponent    
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: InterceptorService, multi: true },

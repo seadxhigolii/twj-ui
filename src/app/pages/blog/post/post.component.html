@@ -1,0 +1,99 @@
+  <div class="container">
+    <div class="content">
+        <div class="blog-post-content">
+            <div class="row">                    
+                <div class="col-lg-9">
+                    <div class="author">
+                        <span class="meta-footer-thumb">
+                            <a style="cursor:pointer;" (click)="redirectToAuthorPosts(blogPost?.authorName)"><img class="author-thumb" [src]="blogPost?.authorImage" [alt]="blogPost?.authorName"></a>
+                        </span>
+                        <span class="author-meta">
+                            <span style="cursor:pointer;" (click)="redirectToAuthorPosts(blogPost?.authorName)" class="post-name"><a>By {{blogPost?.authorName}}</a></span><br/>
+                            <span class="post-date">{{ blogPost?.createdAt | date: 'longDate' }}</span>
+                        </span>
+                    </div>                        
+                    <img class="blog-post-image" [src]="blogPost?.image" alt="">
+                    <svg (click)="shareOnFacebook()" class="social-sharing s-s-fb" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 48 48">
+                        <path fill="#039be5" d="M24 5A19 19 0 1 0 24 43A19 19 0 1 0 24 5Z"></path><path fill="#fff" d="M26.572,29.036h4.917l0.772-4.995h-5.69v-2.73c0-2.075,0.678-3.915,2.619-3.915h3.119v-4.359c-0.548-0.074-1.707-0.236-3.897-0.236c-4.573,0-7.254,2.415-7.254,7.917v3.323h-4.701v4.995h4.701v13.729C22.089,42.905,23.032,43,24,43c0.875,0,1.729-0.08,2.572-0.194V29.036z"></path>
+                    </svg>
+                    <svg (click)="shareOnTwitter()" class="social-sharing s-s-x" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 50 50">
+                        <path d="M 11 4 C 7.134 4 4 7.134 4 11 L 4 39 C 4 42.866 7.134 46 11 46 L 39 46 C 42.866 46 46 42.866 46 39 L 46 11 C 46 7.134 42.866 4 39 4 L 11 4 z M 13.085938 13 L 21.023438 13 L 26.660156 21.009766 L 33.5 13 L 36 13 L 27.789062 22.613281 L 37.914062 37 L 29.978516 37 L 23.4375 27.707031 L 15.5 37 L 13 37 L 22.308594 26.103516 L 13.085938 13 z M 16.914062 15 L 31.021484 35 L 34.085938 35 L 19.978516 15 L 16.914062 15 z"></path>
+                    </svg>
+                    <svg (click)="shareOnPinterest()" class="social-sharing s-s-p" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 48 48">
+                        <circle cx="24" cy="24" r="20" fill="#E60023"></circle><path fill="#FFF" d="M24.4439087,11.4161377c-8.6323242,0-13.2153931,5.7946167-13.2153931,12.1030884	c0,2.9338379,1.5615234,6.5853882,4.0599976,7.7484131c0.378418,0.1762085,0.581543,0.1000366,0.668457-0.2669067	c0.0668945-0.2784424,0.4038086-1.6369019,0.5553589-2.2684326c0.0484619-0.2015381,0.0246582-0.3746338-0.1384277-0.5731201	c-0.8269653-1.0030518-1.4884644-2.8461304-1.4884644-4.5645752c0-4.4115601,3.3399658-8.6799927,9.0299683-8.6799927	c4.9130859,0,8.3530884,3.3484497,8.3530884,8.1369019c0,5.4099731-2.7322998,9.1584473-6.2869263,9.1584473	c-1.9630737,0-3.4330444-1.6238403-2.9615479-3.6153564c0.5654297-2.3769531,1.6569214-4.9415283,1.6569214-6.6584473	c0-1.5354004-0.8230591-2.8169556-2.5299683-2.8169556c-2.006958,0-3.6184692,2.0753784-3.6184692,4.8569336	c0,1.7700195,0.5984497,2.9684448,0.5984497,2.9684448s-1.9822998,8.3815308-2.3453979,9.9415283	c-0.4019775,1.72229-0.2453003,4.1416016-0.0713501,5.7233887l0,0c0.4511108,0.1768799,0.9024048,0.3537598,1.3687744,0.4981079l0,0	c0.8168945-1.3278198,2.0349731-3.5056763,2.4864502-5.2422485c0.2438354-0.9361572,1.2468872-4.7546387,1.2468872-4.7546387	c0.6515503,1.2438965,2.5561523,2.296936,4.5831299,2.296936c6.0314941,0,10.378418-5.546936,10.378418-12.4400024	C36.7738647,16.3591919,31.3823242,11.4161377,24.4439087,11.4161377z"></path>
+                    </svg>
+                    <div *ngIf="blogPost" [innerHTML]="getSafeHtml(blogPost.content)"></div>
+                    <div class="tags">
+                        <div *ngIf="tags.length > 0">
+                            <div *ngFor="let tag of tags" class="tag-box" (click)="getBlogPostsByTagName(tag)">
+                                {{ tag }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 related-blog-posts">
+                    <div *ngIf="isLargeScreen">     
+                        <div *ngFor="let post of blogPostList" class="related-post-card">
+                            <a class="related-post-title-link" [routerLink]="['/post', post.url]">
+                                <img src="{{ post.image }}" alt="" class="related-post-image">
+                                <h2 class="related-post-title">{{ post.title }}</h2>
+                            </a>
+                        </div>
+                        <div class="newsletter-container">
+                            <p class="newsletter-text">Subscribe to our blog and receive weekly updates.</p>
+                            <form [formGroup]="newsletterForm" (ngSubmit)="subscribe()" class="newsletter-form">
+                                <input
+                                formControlName="email"
+                                class="newsletter-email"
+                                type="email"
+                                placeholder="Email Address*"
+                                required
+                                >
+                                <div *ngIf="newsletterForm.get('email').invalid && (newsletterForm.get('email').dirty || newsletterForm.get('email').touched)" class="error-msg">
+                                <small *ngIf="newsletterForm.get('email').errors?.required">Email is required.</small>
+                                <small *ngIf="newsletterForm.get('email').errors?.email">Please enter a valid email.</small>
+                                </div>
+                                <small class="message-success" *ngIf="showSuccessMessage && !(newsletterForm.get('email').invalid && (newsletterForm.get('email').dirty || newsletterForm.get('email').touched))">{{responseMessage}}</small>
+                                <button *ngIf="!showSuccessMessage"  type="submit" class="submit-btn">SUBSCRIBE</button>
+                            </form>                                  
+                        </div>                       
+                        <div class="HSGUKCAolP">
+                            <a *ngIf="rightBanner" [href]="rightBanner.finalUrl" target="_blank" (click)="onBannerClick(rightBanner)">
+                                <img [src]="rightBanner.imageUrl" alt="Right Banner" style="width:100%">
+                            </a>                                
+                            </div>
+                    </div>
+
+                    <div *ngIf="!isLargeScreen">
+                        <div *ngFor="let post of blogPostList" class="card card-sm">
+                            <div class="row">
+                                <div class="col-md-5 wrapthumbnail">
+                                    <a (click)="redirectToPost(post.url)" style="cursor:pointer;">
+                                        <img style="width:100%;" [src]="post.image" class="thumbnail" alt="Post Image">
+                                    </a>
+                                </div>
+                                
+                                <div class="col-md-7">
+                                    <div class="card-block">
+                                        <h4 class="card-title"><a class="card-title-link" [routerLink]="['/post', post.url]">{{ post.title.length > 120 ? (post.title | slice:0:120) + '...' : post.title }}</a></h4>
+                                        <div class="metafooter">
+                                            <div class="wrapfooter">
+                                                <span class="meta-footer-thumb">
+                                                <a class="author-name-title" href="author.html"><img class="author-thumb" [src]="post?.authorImage" [alt]="post?.authorName"></a>
+                                                </span>
+                                                <span class="author-meta">
+                                                    <span class="post-name-sm"><a class="card-title-link" href="author.html">{{post?.authorName}}</a></span><br/>
+                                                    <span class="post-date-sm">{{ post.createdAt | date: 'longDate' }}</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>

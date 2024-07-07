@@ -39,4 +39,25 @@
   <app-home-navbar></app-home-navbar>
   <app-root></app-root>
 </body>
+
+<script>
+  async function trackAdClick(productId, blogPostId, updatedAffiliateLink) {    
+    const payload = {
+      ProductId: productId,
+      BlogPostId: blogPostId,
+      ClickTime: new Date().toISOString()
+    };
+
+    const response = await fetch('http://localhost:5000/api/FeaturedAdClick/Add', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+    
+    
+    window.location.href = updatedAffiliateLink;
+  }
+</script>
 </html>

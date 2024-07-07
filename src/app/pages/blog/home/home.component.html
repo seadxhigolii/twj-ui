@@ -1,0 +1,126 @@
+<section class="home-header">
+	<div class="container">
+		<h1>Your Daily Dose of Wellness and Medical News</h1>
+		<div class="col-lg-12 related-blog-posts">
+			<div class="newsletter-container">
+				<p class="newsletter-text">Subscribe to our blog and receive weekly updates.</p>
+				<form [formGroup]="newsletterForm" (ngSubmit)="subscribe()" class="newsletter-form">
+					<input
+					formControlName="email"
+					class="newsletter-email"
+					type="email"
+					placeholder="Email Address*"
+					required
+					>
+					<div *ngIf="newsletterForm.get('email').invalid && (newsletterForm.get('email').dirty || newsletterForm.get('email').touched)" class="error-msg">
+					<small *ngIf="newsletterForm.get('email').errors?.required">Email is required.</small>
+					<small *ngIf="newsletterForm.get('email').errors?.email">Please enter a valid email.</small>
+					</div>
+					<small class="message-success" *ngIf="showSuccessMessage && !(newsletterForm.get('email').invalid && (newsletterForm.get('email').dirty || newsletterForm.get('email').touched))">{{responseMessage}}</small>
+					<button *ngIf="!showSuccessMessage"  type="submit" class="submit-btn">SUBSCRIBE</button>
+				</form>                                  
+			</div>        
+		</div>
+
+		<div class="row">
+			<div class="custom-centering">
+				<div class="custom-items-start">
+					<div class="flex items-center">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4" stroke="currentColor" class="h-7 w-7 text-green-400">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path>
+						</svg>
+						<p class="item-checklist">Latest Health and Medical News</p>
+					</div>
+					<div class="flex items-center">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4" stroke="currentColor" class="h-7 w-7 text-green-400">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path>
+						</svg>
+						<p class="item-checklist">Practical Health Tips and Guides</p>
+					</div>
+					<div class="flex items-center">
+						<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="4" stroke="currentColor" class="h-7 w-7 text-green-400">
+							<path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path>
+						</svg>
+						<p class="item-checklist">Interactive and Supportive Community Features</p>
+					</div>
+				</div>
+			</div>			
+		</div>		
+	</div>
+</section>
+
+<div class="container">
+	<div class="mainheading">
+		<h1 class="sitetitle">TWJ</h1>
+		<p class="lead">
+			 The Wellness Junction
+		</p>
+	</div>
+	
+	<section class="featured-posts">
+			<div class="section-title">
+				<h2>
+					<span class="bg-text">Latest</span>
+					<span class="view-all" (click)="viewAll()">View All →</span>
+				</h2>
+			</div>		
+			<div class="card-columns listfeaturedtag">
+				<div *ngFor="let post of combinedBlogPostList?.latestPosts" class="card">
+					<div class="row">
+						<div class="col-md-5 wrapthumbnail">
+							<a (click)="redirectToPost(post.url)" style="cursor:pointer;">
+								<div class="thumbnail" [style.background-image]="'url(' + post.imageURL + ')'">
+								</div>
+							</a>
+						</div>
+						<div class="col-md-7">
+							<div class="card-block">
+								<h2 class="card-title"><a (click)="redirectToPost(post.url)" style="cursor:pointer;">{{ post.title.length > 120 ? (post.title | slice:0:120) + '...' : post.title }}</a></h2>
+								<div class="metafooter">
+									<div class="wrapfooter">
+										<span class="author-meta">
+											<span class="post-name"><a style="cursor:pointer;" (click)="redirectToAuthorPosts(post.authorName)">{{ post.authorName }}</a></span><br/>
+											<span class="post-date">{{ post.createdAt | date: 'longDate' }}</span>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	</section>
+
+	<section class="featured-posts">
+		<div style="margin-top:60px;" *ngFor="let tag of combinedBlogPostList?.topTagsWithPosts">
+			<div class="section-title">
+				<h2><span>{{ tag.tagName }}</span><span class="view-all" (click)="viewTagRelated(tag.tagName)">View All →</span></h2>
+			</div>
+			<div class="card-columns listfeaturedtag">
+				<div *ngFor="let post of tag.blogPosts" class="card">
+					<div class="row">
+						<div class="col-md-5 wrapthumbnail">
+							<a (click)="redirectToPost(post.url)" style="cursor:pointer;">
+								<div class="thumbnail" [style.background-image]="'url(' + post.imageURL + ')'">
+								</div>
+							</a>
+						</div>
+						<div class="col-md-7">
+							<div class="card-block">
+								<h2 class="card-title"><a (click)="redirectToPost(post.url)" style="cursor:pointer;">{{ post.title.length > 120 ? (post.title | slice:0:120) + '...' : post.title }}</a></h2>
+								<div class="metafooter">
+									<div class="wrapfooter">
+										<span class="author-meta">
+											<span class="post-name"><a style="cursor:pointer;" (click)="redirectToAuthorPosts(post.authorName)">{{ post.authorName }}</a></span><br/>
+											<span class="post-date">{{ post.createdAt | date: 'longDate' }}</span>
+										</span>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>	
+</div>

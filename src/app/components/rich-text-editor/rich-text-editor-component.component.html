@@ -1,0 +1,15 @@
+<!-- rich-text-editor.component.html -->
+<div class="editor-container">
+  <div class="toolbar">
+    <button (click)="format('bold')">Bold</button>
+    <button (click)="format('italic')">Italic</button>
+    <button (click)="format('underline')">Underline</button>
+  </div>
+  <div contenteditable="true" class="text-editor" (input)="onContentChange($event)"
+       [innerHTML]="editorContent">
+  </div>
+  <div>
+    <h3>Preview:</h3>
+    <div [innerHTML]="editorContent" style="padding: 46px;"></div>
+  </div>
+</div>

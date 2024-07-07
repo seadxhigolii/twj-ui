@@ -1,0 +1,15 @@
+<app-home-navbar></app-home-navbar>
+<app-subscribe-modal *ngIf="showModal"></app-subscribe-modal>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ce6RRN8pNM image-container">
+                <a *ngIf="topBanner" [href]="topBanner.finalUrl" target="_blank" (click)="onBannerClick(topBanner)">
+                    <img [src]="topBanner.imageUrl" alt="Top Banner">
+                </a> 
+            </div>
+        </div>
+    </div>
+</div> 
+<router-outlet></router-outlet>
+<app-home-footer></app-home-footer>

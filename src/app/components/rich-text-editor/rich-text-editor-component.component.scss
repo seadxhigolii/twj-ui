@@ -1,0 +1,17 @@
+/* rich-text-editor.component.scss */
+.editor-container {
+    border: 1px solid #ccc;
+    margin-top: 20px;
+  }
+  
+  .toolbar {
+    border-bottom: 1px solid #ccc;
+    background-color: #f4f4f4;
+    padding: 10px;
+  }
+  
+  .text-editor {
+    min-height: 100px; /* Minimum height */
+    border: 1px solid #ccc; /* Optional: border to make it more visible */
+  }
+  

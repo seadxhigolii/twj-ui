@@ -9,25 +9,34 @@
           </div>
           <div class="table-responsive">
             <table class="table align-items-center table-flush">
-              <thead class="thead-light">
-                <tr>
-                  <ng-container *ngFor="let col of config.columns">
-                    <th class="pointer-cursor" scope="col" *ngIf="col.isSortable" (click)="changeSort(col.dataKey)">
-                      {{ col.name }}
-                    </th>
-                    <th scope="col" *ngIf="!col.isSortable">
-                      {{ col.name }}
-                    </th>
-                  </ng-container>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let item of data">
-                  <ng-container *ngFor="let col of config.columns">
-                    <td>{{ item[col.dataKey] }}</td>
-                  </ng-container>
-                </tr>
-              </tbody>
+              <!-- In generic-table.component.html, add another <th> and <td> for edit actions -->
+        <!-- In generic-table.component.html, add another <th> and <td> for edit actions -->
+            <thead class="thead-light">
+              <tr>
+                <ng-container *ngFor="let col of config.columns">
+                  <th scope="col" *ngIf="col.isSortable" (click)="changeSort(col.dataKey)" class="pointer-cursor">
+                    {{ col.name }}
+                  </th>
+                  <th scope="col" *ngIf="!col.isSortable && !col.action">
+                    {{ col.name }}
+                  </th>
+                  <th scope="col" *ngIf="col.action === 'edit'">
+                    Actions
+                  </th>
+                </ng-container>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of data">
+                <ng-container *ngFor="let col of config.columns">
+                  <td *ngIf="!col.action">{{ item[col.dataKey] }}</td>
+                  <td *ngIf="col.action === 'edit'">
+                    <button class="btn btn-primary btn-sm" (click)="editItem(item)">Edit</button>
+                  </td>
+                </ng-container>
+              </tr>
+            </tbody>
+
             </table>
           </div>
           <div class="card-footer py-4">

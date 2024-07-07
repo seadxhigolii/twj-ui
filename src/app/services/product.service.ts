@@ -15,19 +15,35 @@ import { Response } from 'src/shared/interfaces/responses/response.interface';
 export class ProductService {
 
     private backendUrl = environment.backendUrl; 
-    private headers = new HttpHeaders().append('X-User-Initiated', 'true');
+    
+    private createHeaders(options: { userInitiated?: boolean, contentType?: string } = {}): HttpHeaders {
+        let headers = new HttpHeaders();
+        const token = localStorage.getItem('id_token');
+        if (token) {
+          headers = headers.append('Authorization', `Bearer ${token}`);
+        }
+        if (options.userInitiated) {
+          headers = headers.append('X-User-Initiated', 'true');
+        }
+        if (options.contentType) {
+          headers = headers.append('Content-Type', options.contentType);
+        }
+        return headers;
+  }
     constructor(private http: HttpClient) { }
 
     getAll(): Observable<ProductDTO[]> {
-        return this.http.get<ProductDTO[]>(`${this.backendUrl}/Product/GetAll`, { headers: this.headers });
+        const headers = this.createHeaders({ userInitiated: false });    
+        return this.http.get<ProductDTO[]>(`${this.backendUrl}/Product/GetAll`, { headers });
     }
 
     add(product: ProductDTO): Observable<Response<boolean>> {
-        const headers = new HttpHeaders().append('X-User-Initiated', 'true');
-        return this.http.post<Response<boolean>>(`${this.backendUrl}/Product/Add`, product, { headers: this.headers });
+        const headers = this.createHeaders({ userInitiated: true });    
+        return this.http.post<Response<boolean>>(`${this.backendUrl}/Product/Add`, product, { headers });
     }
 
     getFiltered(filterRequest: FilterRequest): Observable<FilteredResponseDTO<Product>> {
+        const headers = this.createHeaders({ userInitiated: false });    
         const params = new HttpParams()
         .set('page', filterRequest.page.toString())
         .set('pageSize', filterRequest.pageSize.toString())
@@ -35,6 +51,6 @@ export class ProductService {
         .set('sortBy', filterRequest.sortBy || '')
         .set('sortDirection', filterRequest.sortDirection || 'asc');
     
-        return this.http.get<FilteredResponseDTO<Product>>(`${this.backendUrl}/Product/GetFiltered`, { params, headers: this.headers });
+        return this.http.get<FilteredResponseDTO<Product>>(`${this.backendUrl}/Product/GetFiltered`, { params, headers });
     }
 }

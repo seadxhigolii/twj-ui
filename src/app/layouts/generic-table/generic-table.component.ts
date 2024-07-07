@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { FilteredResponseDTO } from 'src/shared/dto/filtered-response.dto';
 import { FilterRequest } from 'src/shared/interfaces/requests/filterRequest.interface';
@@ -8,11 +9,13 @@ export interface TableColumn {
   name: string;
   dataKey: string;
   isSortable?: boolean;
+  action?: 'edit' | 'delete';
 }
 
 export interface TableConfig<T> {
   columns: TableColumn[];
   getFiltered: (request: FilterRequest) => Observable<FilteredResponseDTO<T>>;
+  getEditRoute?: (item: T) => any[];
 }
 
 @Component({
@@ -34,7 +37,7 @@ export class GenericTableComponent<T> implements OnInit {
     page: 1
   };
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     this.loadData();
@@ -73,5 +76,14 @@ export class GenericTableComponent<T> implements OnInit {
     }
     this.filterRequest.page = page;
     this.loadData();
+  }
+
+  editItem(item: T): void {
+    if (this.config.getEditRoute) {
+      const route = this.config.getEditRoute(item);
+      this.router.navigate(route);
+    } else {
+      console.error('Edit route function is not defined in the table config.');
+    }
   }
 }
