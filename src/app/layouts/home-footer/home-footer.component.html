@@ -1,0 +1,37 @@
+<hr>
+<div class="container">
+    <div class="col-lg-12 related-blog-posts">
+        <div class="newsletter-container">
+            <p class="newsletter-text">Subscribe to our blog and receive weekly updates.</p>
+            <form [formGroup]="newsletterForm" (ngSubmit)="subscribe()" class="newsletter-form">
+                <input
+                formControlName="email"
+                class="newsletter-email"
+                type="email"
+                placeholder="Email Address*"
+                required
+                >
+                <div *ngIf="newsletterForm.get('email').invalid && (newsletterForm.get('email').dirty || newsletterForm.get('email').touched)" class="error-msg">
+                <small *ngIf="newsletterForm.get('email').errors?.required">Email is required.</small>
+                <small *ngIf="newsletterForm.get('email').errors?.email">Please enter a valid email.</small>
+                </div>
+                <small class="message-success" *ngIf="showSuccessMessage && !(newsletterForm.get('email').invalid && (newsletterForm.get('email').dirty || newsletterForm.get('email').touched))">{{responseMessage}}</small>
+                <button *ngIf="!showSuccessMessage"  type="submit" class="submit-btn">SUBSCRIBE</button>
+            </form>                                  
+        </div>        
+    </div>
+</div>
+<footer>
+    <div class="footer">
+        <div class="container">
+            <p class="pull-left">
+                 Copyright &copy; {{currentYear}} The Wellness Junction
+            </p>
+            <p class="pull-right">
+                 Theme by <b>TheWellnessJunction</b>
+            </p>
+            <div class="clearfix">
+            </div>
+        </div>
+    </div>
+</footer>

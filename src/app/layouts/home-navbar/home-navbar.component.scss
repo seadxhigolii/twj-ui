@@ -15,6 +15,8 @@
   .custom-navbar-logo {
 	font-size: 1.5rem;
 	margin-right: 20px;
+	color:#fff !important;
+	cursor: pointer;
   }
   
   .custom-navbar-links {
@@ -33,6 +35,7 @@
 	color: #fff;
 	text-decoration: none;
 	transition: color 0.3s ease;
+	font-family: sans-serif !important;
   }
   
   .custom-navbar-links li a:hover {

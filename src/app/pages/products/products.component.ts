@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./products.component.scss']
 })
 export class ProductsComponent implements OnInit {
-  tableConfig: TableConfig<any>; // Consider using a more specific type than `any` for your data
+  tableConfig: TableConfig<any>;
 
   public productList: Product[];
   public title = 'Products';

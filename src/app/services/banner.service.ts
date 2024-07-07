@@ -15,11 +15,15 @@ export class BannerService {
   
   private createHeaders(options: { userInitiated?: boolean, contentType?: string } = {}): HttpHeaders {
     let headers = new HttpHeaders();
+    const token = localStorage.getItem('id_token');
+    if (token) {
+      headers = headers.append('Authorization', `Bearer ${token}`);
+    }
     if (options.userInitiated) {
-        headers = headers.append('X-User-Initiated', 'true');
+      headers = headers.append('X-User-Initiated', 'true');
     }
     if (options.contentType) {
-        headers = headers.append('Content-Type', options.contentType);
+      headers = headers.append('Content-Type', options.contentType);
     }
     return headers;
   }

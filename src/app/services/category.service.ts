@@ -11,15 +11,31 @@ import { ProductCategoryDTO } from 'src/shared/dto/product-category.dto';
 export class CategoryService {
 
   private backendUrl = environment.backendUrl; 
-  private readonly headers = new HttpHeaders().append('X-User-Initiated', 'true');
+  
+  private createHeaders(options: { userInitiated?: boolean, contentType?: string } = {}): HttpHeaders {
+    let headers = new HttpHeaders();
+    const token = localStorage.getItem('id_token');
+    if (token) {
+      headers = headers.append('Authorization', `Bearer ${token}`);
+    }
+    if (options.userInitiated) {
+      headers = headers.append('X-User-Initiated', 'true');
+    }
+    if (options.contentType) {
+      headers = headers.append('Content-Type', options.contentType);
+    }
+    return headers;
+  }
 
   constructor(private http: HttpClient) { }
 
   add(category: ProductCategoryDTO): Observable<Response> {
-    return this.http.post<Response>(`${this.backendUrl}/Category/Add`, category, { headers: this.headers });
+    const headers = this.createHeaders({ userInitiated: true });    
+    return this.http.post<Response>(`${this.backendUrl}/Category/Add`, category, { headers });
   }
 
   getAll(): Observable<CategoryDTO[]> {
-      return this.http.get<CategoryDTO[]>(`${this.backendUrl}/Category/GetAll`);
+    const headers = this.createHeaders({ userInitiated: false });    
+    return this.http.get<CategoryDTO[]>(`${this.backendUrl}/Category/GetAll`);
   }
 }

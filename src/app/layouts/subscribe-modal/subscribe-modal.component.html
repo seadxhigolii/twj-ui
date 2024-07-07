@@ -1,0 +1,22 @@
+<div class="modal-overlay" *ngIf="showModal">
+    <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModal" aria-hidden="true" [class.show]="showModal" style="display: block;">
+        <div class="modal-dialog modal-newsletter">
+            <div class="modal-content">
+                <form (ngSubmit)="onSubmit()" [formGroup]="subscribeForm">
+                    <div class="modal-header">
+                        <h4>Join Our Newsletter</h4>
+                        <button type="button" class="close" aria-hidden="true" (click)="closeModal()"><span>&times;</span></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <p>Subscribe our newsletter to receive the latest news and exclusive offers every week. No spam.</p>
+                        <div class="form-group">
+                            <input type="email" formControlName="email" class="form-control" placeholder="Enter your email" required>
+                            <input type="submit" class="btn btn-primary btn-block" value="Subscribe">
+                        </div>
+                        <div class="footer-link"><a (click)="closeModal()">No Thanks</a></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

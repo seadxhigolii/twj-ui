@@ -17,21 +17,26 @@ export class TagService {
 
     private createHeaders(options: { userInitiated?: boolean, contentType?: string } = {}): HttpHeaders {
         let headers = new HttpHeaders();
+        const token = localStorage.getItem('id_token');
+        if (token) {
+          headers = headers.append('Authorization', `Bearer ${token}`);
+        }
         if (options.userInitiated) {
-            headers = headers.append('X-User-Initiated', 'true');
+          headers = headers.append('X-User-Initiated', 'true');
         }
         if (options.contentType) {
-            headers = headers.append('Content-Type', options.contentType);
+          headers = headers.append('Content-Type', options.contentType);
         }
         return headers;
-    }
+  }
 
     getAll(): Observable<GetAllTagModel[]> {
-        return this.http.get<GetAllTagModel[]>(`${this.backendUrl}/Tag/GetAll`);
+        const headers = this.createHeaders({ userInitiated: false });    
+        return this.http.get<GetAllTagModel[]>(`${this.backendUrl}/Tag/GetAll`, {headers});
     }
 
     getFiltered(page: number, pageSize: number): Observable<FilterResponse<GetFilteredTagModel>> {
-        const headers = this.createHeaders();
+        const headers = this.createHeaders({ userInitiated: false });    
         let params = new HttpParams();
         params = params.append('Page', page.toString());
         params = params.append('PageSize', pageSize.toString());

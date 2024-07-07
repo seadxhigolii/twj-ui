@@ -2,14 +2,12 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-1" style="vertical-align: middle;">
-				<div class="custom-navbar-logo">TWJ</div>
+				<div (click)="redirectTo('Home')" class="custom-navbar-logo">TWJ</div>
 			</div>
 			<div class="col-xs-11"style="vertical-align: middle; margin-top: 6px;">
 				<ul class="custom-navbar-links" id="customNavbarLinks">
 					<li><a (click)="redirectTo('Home')">Home</a></li>
 					<li><a (click)="redirectTo('Tags')">Tags</a></li>
-					<li><a (click)="redirectTo('Authors')">Authors</a></li>
-					<li><a (click)="redirectTo('Contact')">Contact</a></li>
 				</ul>
 			</div>
 		</div>
