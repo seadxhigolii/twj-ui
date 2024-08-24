@@ -3,6 +3,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BlogpostService } from 'src/app/services/blogpost.service';
 import { GetByAuthorFilteredModel } from 'src/shared/interfaces/blogPost/getByAuthorFilteredModel.interface';
+import { UserService } from '../../../services/user.service';
+import { GetUserByIdModel } from '../../../../shared/interfaces/user/getUserByIdModel.interface';
 
 @Component({
   selector: 'app-author-posts',
@@ -18,10 +20,12 @@ export class AuthorPostsComponent implements OnInit {
   pageSize: number = 4;
   totalPages: number = 1;
   totalItems: number = 0;
-  
+  authorId: string = '';
+  author : GetUserByIdModel
   
   constructor(
     private blogPostService: BlogpostService,    
+    private userService: UserService,
     private route: ActivatedRoute,
     private router: Router
   ) {
@@ -37,8 +41,10 @@ export class AuthorPostsComponent implements OnInit {
     });
   }
 
-  getAuthor(authorId: string) {
-    
+  private _getAuthor() {
+    this.userService.getById(this.authorId).subscribe(respose=>{
+      this.author = respose;
+    });
   }
 
   capitalizeWord(input: string): string {
@@ -49,6 +55,12 @@ export class AuthorPostsComponent implements OnInit {
     this.blogPostService.getByAuthorFiltered(this.currentPage, this.pageSize, this.authorName)
       .subscribe(result => {
         this.blogPostList = result.data as GetByAuthorFilteredModel[];
+        
+        if (this.blogPostList && this.blogPostList.length > 0) {
+          this.authorId = this.blogPostList[0].userId;
+          this._getAuthor();
+        }
+  
         this.totalPages = result.totalPages;
         this.totalItems = result.totalItems;
       }, error => {
@@ -56,6 +68,7 @@ export class AuthorPostsComponent implements OnInit {
         console.error("Error fetching data:", error);
       });
   }
+  
   
   onPageChange(page: number) {
     this.currentPage = page;

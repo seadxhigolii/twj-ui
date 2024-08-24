@@ -1,7 +1,7 @@
-.container { 
-	color: #525F7F !important;
-	font-family: Georgia, sans-serif, arial !important;
-  }
+	.container { 
+		color: #525F7F !important;
+		font-family: Georgia, sans-serif, arial !important;
+	}
 
   .ce6RRN8pNM-span {
 	font-size: 9px;
@@ -417,8 +417,14 @@
 
 // MAIN CONTENT
 
-:host .nm4JsSMWGj h1,h2,h3,h4,h5,h6{
-	font-family: Segoe UI, Roboto, sans-serif !important;
+.nm4JsSMWGj h1,.nm4JsSMWGj h2 {
+	font-family: Georgia, sans-serif, arial !important;
+    color: #333330 !important;
+    font-weight: 700 !important;
+}
+
+.nm4JsSMWGj h3, .nm4JsSMWGj h4,.nm4JsSMWGj h5,.nm4JsSMWGj h6 {
+	font-family: Georgia, sans-serif, arial !important;
     color: #333330 !important;
     font-weight: 600 !important;
 }
