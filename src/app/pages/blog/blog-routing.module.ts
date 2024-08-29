@@ -9,6 +9,7 @@ import { AuthorPostsComponent } from './author-posts/author-posts.component';
 import { TaggedPostsComponent } from './tagged-posts/tagged-posts.component';
 import { AllPostsComponent } from './all-posts/all-posts.component';
 import { BlogLayoutComponent } from './blog-layout/blog-layout.component';
+import { EmailUnsubscribeComponent } from './email-unsubscribe/email-unsubscribe.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,9 @@ const routes: Routes = [
       }, {
         path: 'home',
         component: HomeComponent
+      }, {
+        path: 'email-unsubscribe/:id',
+        component: EmailUnsubscribeComponent
       }, {
         path: 'post/:url',
         component: PostComponent

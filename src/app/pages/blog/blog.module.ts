@@ -15,6 +15,7 @@ import { HomeNavbarComponent } from 'src/app/layouts/home-navbar/home-navbar.com
 import { BlogLayoutComponent } from './blog-layout/blog-layout.component';
 import { HomeFooterComponent } from 'src/app/layouts/home-footer/home-footer.component';
 import { SubscribeModalComponent } from 'src/app/layouts/subscribe-modal/subscribe-modal.component';
+import { EmailUnsubscribeComponent } from './email-unsubscribe/email-unsubscribe.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { SubscribeModalComponent } from 'src/app/layouts/subscribe-modal/subscri
     HomeNavbarComponent,
     HomeFooterComponent,
     SubscribeModalComponent,
-    BlogLayoutComponent
+    BlogLayoutComponent,
+    EmailUnsubscribeComponent
   ],
   imports: [
     CommonModule,

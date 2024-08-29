@@ -47,8 +47,10 @@
       BlogPostId: blogPostId,
       ClickTime: new Date().toISOString()
     };
+    
+    const baseUrl = window.location.origin;
 
-    const response = await fetch('http://localhost:5000/api/FeaturedAdClick/Add', {
+    const response = await fetch(`${baseUrl}/api/FeaturedAdClick/Add`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -56,8 +58,8 @@
       body: JSON.stringify(payload)
     });
     
-    
     window.location.href = updatedAffiliateLink;
   }
 </script>
+
 </html>
