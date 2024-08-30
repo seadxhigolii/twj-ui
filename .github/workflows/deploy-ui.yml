@@ -1,0 +1,60 @@
+name: Deploy Angular to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20.4.0'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Angular project
+        run: ng build --configuration production
+
+      - name: Upload dist folder as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist-folder
+          path: ./dist/twj-ui
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/aws-key.pem
+          chmod 600 ~/.ssh/aws-key.pem
+
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: dist-folder
+          path: ./downloaded-artifacts/dist-folder
+
+      - name: List files in artifact
+        run: ls -l ./downloaded-artifacts/dist-folder
+
+      - name: Make deploy.sh executable
+        run: chmod +x ./scripts/deploy.sh
+
+      - name: Run deployment script
+        run: ./scripts/deploy.sh
