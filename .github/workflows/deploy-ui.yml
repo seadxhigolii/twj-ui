@@ -27,6 +27,9 @@ jobs:
       - name: Build Angular project
         run: ng build --configuration production
 
+      - name: List build directory
+        run: ls -l ./dist/twj-ui
+
       - name: Upload dist folder as artifact
         uses: actions/upload-artifact@v2
         with:
