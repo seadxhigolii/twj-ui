@@ -25,7 +25,7 @@ jobs:
         run: npm install --legacy-peer-deps
 
       - name: Verify Angular CLI Installation
-        run: ng --version
+        run: ng version
 
       - name: Build Angular project
         run: ng build --configuration production
