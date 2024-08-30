@@ -24,8 +24,14 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
 
+      - name: Verify Angular CLI Installation
+        run: ng --version
+
       - name: Build Angular project
         run: ng build --configuration production
+
+      - name: List all directories and files
+        run: ls -R
 
       - name: List build directory
         run: ls -l ./dist/twj-ui
