@@ -18,11 +18,23 @@ jobs:
         with:
           node-version: '20.4.0'
 
+      - name: Install Angular CLI
+        run: npm install -g @angular/cli
+
       - name: Install dependencies
-        run: npm install
+        run: npm install --legacy-peer-deps
+
+      - name: Verify Angular CLI Installation
+        run: ng version
 
       - name: Build Angular project
         run: ng build --configuration production
+
+      - name: List all directories and files
+        run: ls -R
+
+      - name: List build directory
+        run: ls -l ./dist/twj-ui
 
       - name: Upload dist folder as artifact
         uses: actions/upload-artifact@v2
@@ -54,7 +66,7 @@ jobs:
         run: ls -l ./downloaded-artifacts/dist-folder
 
       - name: Make deploy.sh executable
-        run: chmod +x ./scripts/deploy.sh
+        run: chmod +x ./deploy.sh
 
       - name: Run deployment script
-        run: ./scripts/deploy.sh
+        run: ./deploy.sh
