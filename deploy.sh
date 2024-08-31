@@ -2,7 +2,7 @@
 
 # Define variables
 SERVER_USER=ec2-user
-SERVER_IP=52.202.73.100
+SERVER_IP=44.212.18.216
 PEM_FILE="$HOME/.ssh/aws-key.pem"  # Path where the PEM file will be saved from GitHub secrets
 REMOTE_PATH=/var/www/html
 LOCAL_DIST_PATH="./downloaded-artifacts/dist-folder"
