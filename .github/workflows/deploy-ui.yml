@@ -36,9 +36,6 @@ jobs:
       - name: List build directory
         run: ls -l ./dist/twj-ui
 
-      - name: Clear previous artifacts
-        run: rm -rf ./dist/twj-ui
-
       - name: Upload dist folder as artifact
         uses: actions/upload-artifact@v2
         with:
@@ -58,6 +55,9 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/aws-key.pem
           chmod 600 ~/.ssh/aws-key.pem
+          
+      - name: Clear previous downloaded artifacts
+        run: rm -rf ./downloaded-artifacts
 
       - name: Download artifact
         uses: actions/download-artifact@v2
