@@ -36,6 +36,9 @@ jobs:
       - name: List build directory
         run: ls -l ./dist/twj-ui
 
+      - name: Clear previous artifacts
+        run: rm -rf ./dist/twj-ui
+
       - name: Upload dist folder as artifact
         uses: actions/upload-artifact@v2
         with:
