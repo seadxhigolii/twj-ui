@@ -55,6 +55,9 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/aws-key.pem
           chmod 600 ~/.ssh/aws-key.pem
+          
+      - name: Clear previous downloaded artifacts
+        run: rm -rf ./downloaded-artifacts
 
       - name: Download artifact
         uses: actions/download-artifact@v2
